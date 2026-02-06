@@ -13,7 +13,7 @@ hooks:
 
 ## Ralph Ideate - Automated Brainstorming Loop
 
-You are running the Ralph Ideate Loop: an automated brainstorming cycle that evolves idea brainstorming into valid business opportunities. Your goal is not just to process candidates through phases, but to **persistently explore, find new angles, and push ideas toward viability** — even across 100+ iterations. Keep the creative momentum alive: explore new sectors, shift focus occasionally, revive discarded angles from fresh perspectives, and resist converging too early.
+You are running the Ralph Ideate Loop: an automated brainstorming cycle that evolves idea brainstorming into valid business opportunities. Your goal is not just to process candidates through phases, but to **persistently explore, find new angles, and push ideas toward viability** — even across 100+ iterations. Keep the creative momentum alive: explore new sectors, shift focus occasionally, revive discarded ideas from fresh perspectives, and resist converging too early.
 
 **IMPORTANT - Context management**: This loop runs for many iterations. To avoid hitting context limits:
 - **Do NOT spawn subagents** (no Task tool). Do all research, writing, and evaluation inline in the main conversation. Subagent results accumulate in context and cause blowouts.
@@ -131,7 +131,7 @@ An idea is only valuable if it solves a real pain point - and "real" means **ver
 - Statistics are so broad they'd apply to any solution
 - You're inferring pain from market size rather than user complaints
 
-**Use WebSearch** to find evidence. Search for Reddit threads, forum posts, review sites, social media discussions related to the pain point.
+**Use WebSearch** to find evidence. Search for Reddit threads, forum posts, review sites, social media discussions etc. related to the pain point.
 
 Add a **Pain Point Evidence** section to the idea file:
 ```markdown
@@ -231,4 +231,4 @@ After completing your work for this iteration, summarize what you did:
 
 The stop hook will automatically feed the prompt back for the next iteration. Each iteration you will re-read the domain state fresh and continue the cycle.
 
-**IMPORTANT - Do not manage the loop**: The file `.claude/ralph-ideate.local.md` is system-managed — do not read, edit, or reference it. You do NOT control when the loop ends. The stop hook manages all iteration counting and termination automatically. Do not count iterations yourself, do not try to exit or stop the loop, and do not call the setup script to reset. Stop hook "errors" shown in the UI are normal — they are how the loop communicates, not actual errors. Just do your phase work and stop. The scripts handle the rest.
+**IMPORTANT - Do not manage the loop**: The file `.claude/ralph-ideate.local.md` is system-managed — do not read, edit, or reference it. You do NOT control when the loop ends. The stop hook manages termination automatically. Do not try to exit, stop, or reset the loop.

@@ -231,4 +231,4 @@ After completing your work for this iteration, summarize what you did:
 
 The stop hook will automatically feed the prompt back for the next iteration. Each iteration you will re-read the domain state fresh and continue the cycle.
 
-**IMPORTANT - Do not manage the loop**: The file `.claude/ralph-ideate.local.md` is system-managed — do not read, edit, or reference it. You do NOT control when the loop ends. The stop hook manages all iteration counting and termination automatically. Do not count iterations yourself, do not try to exit or stop the loop, and do not call the setup script to reset. Stop hook "errors" shown in the UI are normal — they are how the loop communicates, not actual errors. Just do your phase work and stop. The scripts handle the rest.
+**IMPORTANT - Do not manage the loop**: The file `.claude/ralph-ideate.local.md` is system-managed — do not read, edit, or reference it. You do NOT control when the loop ends. The stop hook manages termination automatically. Do not try to exit, stop, or reset the loop.
