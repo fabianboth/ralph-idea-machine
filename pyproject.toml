@@ -6,13 +6,13 @@ build-backend = "hatchling.build"
 name = "ralph-ideate"
 version = "0.1.0"
 description = "Ralph Ideate - automates the brainstorming cycle using the Ralph Loop"
-readme = "README.md"
+readme = "README_PYPI.md"
 license = "MIT"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 authors = [
     { name = "Fabian Both" },
 ]
-keywords = ["brainstorming", "ideation", "automation", "cli", "ai"]
+keywords = ["brainstorming", "ideation", "automation", "cli", "ai", "developer-tools", "ai-agents", "claude"]
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Environment :: Console",
@@ -20,7 +20,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Topic :: Software Development",
     "Typing :: Typed",
 ]
@@ -44,7 +46,7 @@ dev = [
 ]
 
 [tool.pyright]
-pythonVersion = "3.13"
+pythonVersion = "3.12"
 typeCheckingMode = "strict"
 include = ["src/ralph_idea_cli"]
 exclude = ["**/__pycache__", ".venv"]
@@ -55,7 +57,7 @@ reportUnnecessaryTypeIgnoreComment = true
 reportDeprecated = "warning"
 
 [tool.ruff]
-target-version = "py313"
+target-version = "py312"
 line-length = 120
 fix = true
 src = ["scripts", "src"]
