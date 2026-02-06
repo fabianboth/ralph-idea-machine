@@ -1,7 +1,7 @@
 ---
 name: ralph-ideate.explore
-description: Run the Ralph Ideate Loop to brainstorm, research, and evaluate ideas in a domain. Use when asked to explore or brainstorm ideas.
-argument-hint: <domain-path> [--max-iterations N]
+description: Run the Ralph Ideate Loop - brainstorm, research, and evaluate ideas in a domain. Use when asked to explore or brainstorm ideas.
+argument-hint: @<domain-path> ["custom prompt"] [--max-iterations N]
 allowed-tools: Read, Write, Edit, Bash, WebSearch, WebFetch, Glob, Grep
 disable-model-invocation: true
 hooks:
@@ -11,20 +11,30 @@ hooks:
           command: bash .claude/skills/ralph-ideate.explore/scripts/loop-context.sh
 ---
 
-## Ralph Ideate — Automated Brainstorming Loop
+## Ralph Ideate - Automated Brainstorming Loop
 
-You are running the Ralph Ideate Loop: an automated brainstorming cycle that systematically explores, researches, and evaluates business ideas.
+You are running the Ralph Ideate Loop: an automated brainstorming cycle that evolves idea brainstorming into valid business opportunities. Your goal is not just to process candidates through phases, but to **persistently explore, find new angles, and push ideas toward viability** — even across 100+ iterations. Keep the creative momentum alive: explore new sectors, shift focus occasionally, revive discarded angles from fresh perspectives, and resist converging too early.
+
+**IMPORTANT - Do not touch the state file**: The file `.claude/ralph-ideate.local.md` is managed exclusively by the bash scripts. You MUST NOT read, edit, or reference this file. The stop hook handles loop iteration and prompt replay automatically.
+
+**IMPORTANT - Context management**: This loop runs for many iterations. To avoid hitting context limits:
+- **Do NOT spawn subagents** (no Task tool). Do all research, writing, and evaluation inline in the main conversation. Subagent results accumulate in context and cause blowouts.
+- **Read efficiently**: For `verified/` and `discarded/`, list filenames with Glob to know what exists, but only read files when you specifically need their content (e.g., checking if an idea was already tried). Don't re-read every file every iteration.
+- **Keep iterations focused**: Research 2-6 ideas per iteration — enough to make progress but not so many that context bloats.
 
 ### First: Initialize the Loop
 
 Parse `$ARGUMENTS` to extract:
-- **Domain path**: The first non-flag argument (e.g., `src/saas-tools`)
-- **--max-iterations N**: Optional flag to limit iterations (default: unlimited = 0)
+- **Domain path**: The first non-flag, non-quoted argument (e.g., `ideate/saas-tools`). Users may use the `@` prefix for autocomplete — strip any leading `@` from the path.
+- **Custom prompt** (optional): A quoted string providing brainstorming focus (e.g., `"Focus on B2B developer tools"`)
+- **--max-iterations N** (optional): Maximum number of iterations (default: 10)
 
-Run the setup script:
+Run the setup script with the extracted values:
 ```bash
-bash .claude/skills/ralph-ideate.explore/scripts/setup-ralph-ideate.sh --domain <domain-path> --max-iterations <N-or-0> "Explore ideas in <domain-path>"
+bash .claude/skills/ralph-ideate.explore/scripts/setup-ralph-ideate.sh --domain <domain-path> --max-iterations <N-or-10> "<custom-prompt-if-provided>"
 ```
+
+If no custom prompt was provided, omit the prompt argument - the setup script will use a sensible default.
 
 Then proceed with the first iteration below.
 
@@ -32,12 +42,16 @@ Then proceed with the first iteration below.
 
 ### Each Iteration: The Ralph Ideate Loop
 
+**Reminder**: Never read or edit `.claude/ralph-ideate.local.md` - it is system-managed.
+
 **Step 1: Read Current State**
 
-1. Read `<domain>/DESCRIPTION.md` — understand scope, focus, constraints, and what makes a good opportunity
-2. List and read all files in `<domain>/candidates/` — ideas under evaluation
-3. List and read all files in `<domain>/verified/` — ideas that passed scrutiny
-4. List and read all files in `<domain>/discarded/` — rejected ideas (avoid repeating these)
+1. Read `<domain>/DESCRIPTION.md` - understand scope, focus, constraints, and what makes a good opportunity
+2. List and read all files in `<domain>/candidates/` - ideas under evaluation (these are your active work)
+3. List filenames in `<domain>/verified/` - know what's already been verified (only read specific files if needed for context)
+4. List filenames in `<domain>/discarded/` - know what's been rejected to avoid repeating (only read specific files if you need to check a particular rejection reason)
+
+**Domain Description Updates**: If the user explicitly requests changes to the domain description (e.g., "update the description to...", "add a constraint about...", "the description should mention..."), update `<domain>/DESCRIPTION.md` accordingly and report the change in the iteration summary. Only update when explicitly asked — do not proactively modify the description based on observed patterns.
 
 **Step 2: Determine Phase**
 
@@ -49,7 +63,7 @@ Based on the current state, decide what to do this iteration:
 - **Candidates have been scrutinized** → Go to **Phase 5: Decision**
 - **Mix of states** → Prioritize: research unresearched candidates first, then scrutinize researched ones, then generate new ideas to keep the pipeline full
 
-A good iteration touches multiple phases — generate some new ideas AND research/scrutinize existing ones. Don't only do one thing.
+A good iteration touches multiple phases - generate some new ideas AND research/scrutinize existing ones. Don't only do one thing.
 
 ---
 
@@ -63,7 +77,7 @@ Generate 3-5 new candidate ideas. Create a markdown file for each in `<domain>/c
 ```markdown
 # <Idea Name>
 
-<Brief description of the core concept — what does this do?>
+<Brief description of the core concept - what does this do?>
 
 ## Hypothesized Pain Point
 
@@ -77,8 +91,8 @@ Generate 3-5 new candidate ideas. Create a markdown file for each in `<domain>/c
 **Creativity guidelines**:
 - Explore new sectors, interpolate between existing ideas, try new angles
 - Extrapolate to adjacent markets and near-term trends
-- Avoid iterating on the same idea space — use creative techniques to think outside the box
-- Check `discarded/` before creating — don't repeat rejected ideas (you may re-evaluate from a genuinely different angle, but don't rehash the same concept)
+- Avoid iterating on the same idea space - use creative techniques to think outside the box
+- Check `discarded/` before creating - don't repeat rejected ideas (you may re-evaluate from a genuinely different angle, but don't rehash the same concept)
 
 ---
 
@@ -88,7 +102,7 @@ For each candidate that lacks a "Pain Point Evidence" section, conduct web resea
 
 **Core principle: Verified Pain Points First**
 
-An idea is only valuable if it solves a real pain point — and "real" means **verified through research**, not assumed. Ask:
+An idea is only valuable if it solves a real pain point - and "real" means **verified through research**, not assumed. Ask:
 - Is this pain point verified? (Evidence of real people experiencing this?)
 - Is it urgent? (Do they need it solved now?)
 - Is it frequent? (Happens often enough to matter?)
@@ -101,11 +115,14 @@ An idea is only valuable if it solves a real pain point — and "real" means **v
 - Social media posts, tweets, or LinkedIn discussions about the struggle
 - Job postings that hint at manual workarounds or inefficiencies
 
+**Gut feelings and assumptions are not validation.** If you can't find real people complaining about this problem, the pain point is hypothetical. However, research often reveals *adjacent* pain points that ARE real — be open to rescoping around verified problems rather than forcing a hypothesis with no evidence.
+
 **Weak evidence (supporting context only, never primary validation):**
-- Statistics that describe a condition but don't connect to the solution
-- Broad statistics that apply to many categories equally
-- Industry reports without user voice
-- Consultant/vendor marketing content describing problems
+- Statistics that describe a condition but don't connect to the solution (e.g., "X million people have depression" does NOT validate demand for a depression chatbot)
+- Broad statistics that apply to many categories equally (e.g., "businesses waste time on admin")
+- "The market is $X billion" does NOT validate an opportunity — big markets have big competition
+- Industry reports without user voice — numbers don't prove people *want* your solution
+- Consultant/vendor marketing content describing problems (they have incentive to inflate pain)
 
 **The key test**: Can you find **actual people** (not vendors, not consultants) **in their own words** describing this specific frustration?
 
@@ -120,8 +137,8 @@ Add a **Pain Point Evidence** section to the idea file:
 ```markdown
 ## Pain Point Evidence
 
-- "<Direct quote or paraphrased complaint>" — [Source](url)
-- "<Another user complaint>" — [Source](url)
+- "<Direct quote or paraphrased complaint>" - [Source](url)
+- "<Another user complaint>" - [Source](url)
 - Volume: <indicator, e.g., "50+ Reddit threads", "common 1-star review theme">
 ```
 
@@ -134,7 +151,7 @@ Add a **Pain Point Evidence** section to the idea file:
 - Does something similar already exist?
 - What's the competitive landscape?
 - Are there failed attempts? Why did they fail?
-- Competition validates demand — don't auto-discard, look for gaps
+- **If competitors exist, try harder**: Competition validates demand but doesn't automatically disqualify an idea. Look for underserved segments, unmet needs, or gaps. Try different angles — different perspectives, business models, niches. But any differentiation must be validated with research, not assumed.
 
 Add a **Research Notes** section with competitive findings.
 
@@ -153,7 +170,7 @@ Based on research findings, explore creative angles:
 
 This phase may generate new candidates or transform existing ones. Updated ideas should cycle back through Research to validate new hypotheses.
 
-**Avoid pattern lock-in**: Don't over-rely on patterns from previously verified ideas. Each idea stands on its own merits.
+**Avoid pattern lock-in**: Don't over-rely on patterns from previously verified ideas. Each idea should be evaluated on its own merits. Past successes (or failures) are useful heuristics but shouldn't constrain creative exploration. A new idea might succeed through a completely different model than existing verified ideas — be open to ideas that break the mold if they have strong pain point evidence.
 
 ---
 

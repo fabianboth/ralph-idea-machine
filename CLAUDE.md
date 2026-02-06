@@ -10,7 +10,14 @@ Ralph Ideate - automates the brainstorming cycle using the Ralph Ideate Loop (id
 
 - `src/ralph_idea_cli/` — CLI package (typer-based), entry point in `cli.py`
 - `src/ralph_idea_cli/templates/` — Bundled skill files installed by `ralph-ideate init`
+- `ideate/` — Brainstorming domains (created via `/ralph-ideate.create`)
 - `specs/` — Feature specifications (speckit-managed)
+
+## Skills
+
+- `/ralph-ideate.create` — Create a domain from a free-form description (auto-names, synthesizes DESCRIPTION.md)
+- `/ralph-ideate.explore @ideate/<domain>` — Run the brainstorming loop (ideate, research, scrutinize, decide)
+- `/ralph-ideate.refine @ideate/<domain>` — Refine a domain description (quality review or targeted edits)
 
 ## Tech Stack
 

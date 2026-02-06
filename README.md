@@ -31,15 +31,15 @@ ralph-ideate init
 ### 1. Create a brainstorming domain
 
 ```text
-/ralph-ideate.create saas-tools
+/ralph-ideate.create B2B services that agentic AI can fully automate end-to-end
 ```
 
-This scaffolds a domain directory and guides you through writing a `DESCRIPTION.md` that defines scope, focus, and evaluation criteria.
+Describe what you want to brainstorm about - the skill auto-generates a domain name and synthesizes a `DESCRIPTION.md` with focus areas, constraints, and quality criteria.
 
 ### 2. Explore ideas
 
 ```text
-/ralph-ideate.explore ideate/saas-tools
+/ralph-ideate.explore @ideate/agentic-ai-agencies
 ```
 
 This starts the Ralph Ideate Loop - a continuous cycle that generates candidates, researches pain points with real user evidence, critically evaluates viability, and moves ideas to `verified/` or `discarded/`.
@@ -47,7 +47,7 @@ This starts the Ralph Ideate Loop - a continuous cycle that generates candidates
 Optionally pass a custom prompt and iteration limit:
 
 ```text
-/ralph-ideate.explore ideate/saas-tools "Focus on B2B pain points" --max-iterations 20
+/ralph-ideate.explore @ideate/agentic-ai-agencies "Focus on B2B pain points" --max-iterations 20
 ```
 
 | Option | Default | Description |
@@ -56,6 +56,18 @@ Optionally pass a custom prompt and iteration limit:
 | `--max-iterations N` | `10` | Auto-stop after N iterations (`0` = unlimited) |
 
 Inject steering feedback between iterations to redirect focus.
+
+### 3. Refine a domain description
+
+```text
+/ralph-ideate.refine @ideate/agentic-ai-agencies
+```
+
+Run a quality review of the domain description, or pass specific changes:
+
+```text
+/ralph-ideate.refine @ideate/agentic-ai-agencies add a constraint about B2B focus
+```
 
 ## How It Works
 
