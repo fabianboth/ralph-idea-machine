@@ -24,6 +24,8 @@ You are running the Ralph Ideate Loop: an automated brainstorming cycle that evo
 
 ### First: Initialize the Loop
 
+**IMPORTANT - ALWAYS run the setup script**: You MUST run the setup script on EVERY invocation — even if this skill ran before in this conversation, even if verified/discarded ideas already exist, and even if you believe exploration is "complete". Never skip initialization or summarize prior results instead of starting the loop.
+
 Parse `$ARGUMENTS` to extract:
 - **Domain path**: The first non-flag, non-quoted argument (e.g., `ideate/saas-tools`). Users may use the `@` prefix for autocomplete — strip any leading `@` from the path.
 - **Custom prompt** (optional): A quoted string providing brainstorming focus (e.g., `"Focus on B2B developer tools"`)
