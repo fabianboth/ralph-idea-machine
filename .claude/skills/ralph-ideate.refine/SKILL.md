@@ -1,7 +1,7 @@
 ---
 name: ralph-ideate.refine
 description: Refine and improve a brainstorming domain description. Reviews quality and applies targeted improvements.
-argument-hint: <domain-path> [refinement instructions]
+argument-hint: @<domain-path> [refinement instructions]
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 
@@ -20,7 +20,7 @@ The user provided: `$ARGUMENTS`
 - **If domain path + refinement instructions** (e.g., `ideate/my-domain add anti-patterns for partial automation`): Apply the specific requested changes to that domain's description.
 
 Extract:
-- **Domain path**: The first argument that looks like a path (contains `/` or starts with `ideate/`)
+- **Domain path**: The first argument that looks like a path (contains `/` or starts with `ideate/`). Users may use the `@` prefix for autocomplete — strip any leading `@` from the path.
 - **Refinement instructions**: Everything after the domain path (may be empty)
 
 ### Step 2: Read Current Description

@@ -1,7 +1,7 @@
 ---
 name: ralph-ideate.explore
 description: Run the Ralph Ideate Loop - brainstorm, research, and evaluate ideas in a domain. Use when asked to explore or brainstorm ideas.
-argument-hint: <domain-path> ["custom prompt"] [--max-iterations N]
+argument-hint: @<domain-path> ["custom prompt"] [--max-iterations N]
 allowed-tools: Read, Write, Edit, Bash, WebSearch, WebFetch, Glob, Grep
 disable-model-invocation: true
 hooks:
@@ -20,7 +20,7 @@ You are running the Ralph Ideate Loop: an automated brainstorming cycle that sys
 ### First: Initialize the Loop
 
 Parse `$ARGUMENTS` to extract:
-- **Domain path**: The first non-flag, non-quoted argument (e.g., `ideate/saas-tools`)
+- **Domain path**: The first non-flag, non-quoted argument (e.g., `ideate/saas-tools`). Users may use the `@` prefix for autocomplete — strip any leading `@` from the path.
 - **Custom prompt** (optional): A quoted string providing brainstorming focus (e.g., `"Focus on B2B developer tools"`)
 - **--max-iterations N** (optional): Maximum number of iterations (default: 10)
 
