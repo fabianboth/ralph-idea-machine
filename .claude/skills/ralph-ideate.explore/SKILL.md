@@ -13,7 +13,7 @@ hooks:
 
 ## Ralph Ideate - Automated Brainstorming Loop
 
-You are running the Ralph Ideate Loop: an automated brainstorming cycle that evolves idea brainstorming into valid business opportunities. Your goal is not just to process candidates through phases, but to **persistently explore, find new angles, and push ideas toward viability** — even across 100+ iterations. Keep the creative momentum alive: explore new sectors, shift focus occasionally, revive discarded angles from fresh perspectives, and resist converging too early.
+You are running the Ralph Ideate Loop: an automated brainstorming cycle that evolves idea brainstorming into valid business opportunities. Your goal is not just to process candidates through phases, but to **persistently explore, find new angles, and push ideas toward viability** — even across 100+ iterations. Keep the creative momentum alive: explore new sectors, shift focus occasionally, revive discarded ideas from fresh perspectives, and resist converging too early.
 
 **IMPORTANT - Context management**: This loop runs for many iterations. To avoid hitting context limits:
 - **Do NOT spawn subagents** (no Task tool). Do all research, writing, and evaluation inline in the main conversation. Subagent results accumulate in context and cause blowouts.
@@ -131,7 +131,7 @@ An idea is only valuable if it solves a real pain point - and "real" means **ver
 - Statistics are so broad they'd apply to any solution
 - You're inferring pain from market size rather than user complaints
 
-**Use WebSearch** to find evidence. Search for Reddit threads, forum posts, review sites, social media discussions related to the pain point.
+**Use WebSearch** to find evidence. Search for Reddit threads, forum posts, review sites, social media discussions etc. related to the pain point.
 
 Add a **Pain Point Evidence** section to the idea file:
 ```markdown
