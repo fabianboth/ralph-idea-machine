@@ -3,39 +3,39 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "reviewloop"
-version = "0.3.1"
-description = "Autonomous review loop - automates the review-fix-push cycle"
+name = "ralph-idea"
+version = "0.1.0"
+description = "Ralph Idea Machine - automates the brainstorming cycle using the Ralph Loop"
 readme = "README_PYPI.md"
 license = "MIT"
 requires-python = ">=3.13"
 authors = [
     { name = "Fabian Both" },
 ]
-keywords = ["code-review", "automation", "cli", "developer-tools", "ai"]
+keywords = ["brainstorming", "ideation", "automation", "cli", "ai"]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 2 - Pre-Alpha",
     "Environment :: Console",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.13",
-    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development",
     "Typing :: Typed",
 ]
 dependencies = ["typer", "rich", "readchar"]
 
 [project.urls]
-Homepage = "https://github.com/fabianboth/autonomous-review-loop"
-Repository = "https://github.com/fabianboth/autonomous-review-loop.git"
-Issues = "https://github.com/fabianboth/autonomous-review-loop/issues"
+Homepage = "https://github.com/fabianboth/ralph-idea-machine"
+Repository = "https://github.com/fabianboth/ralph-idea-machine.git"
+Issues = "https://github.com/fabianboth/ralph-idea-machine/issues"
 
 [project.scripts]
-reviewloop = "reviewloop_cli.cli:main"
+ralph-idea = "ralph_idea_cli.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/reviewloop_cli"]
+packages = ["src/ralph_idea_cli"]
 
 [dependency-groups]
 dev = [
@@ -46,7 +46,7 @@ dev = [
 [tool.pyright]
 pythonVersion = "3.13"
 typeCheckingMode = "strict"
-include = ["src/reviewloop_cli"]
+include = ["src/ralph_idea_cli"]
 exclude = ["**/__pycache__", ".venv"]
 reportPrivateUsage = false
 reportOverlappingOverload = true

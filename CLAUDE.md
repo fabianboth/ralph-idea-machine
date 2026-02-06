@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Autonomous Review Loop - pairs your review bot with your coding agent to automate the review-fix-push cycle.
+Ralph Idea Machine - automates the brainstorming cycle using the Ralph Loop (ideate, extend, research, scrutinize, repeat).
 
 ## CRITICAL: File Editing on Windows
 
@@ -8,14 +8,12 @@ Autonomous Review Loop - pairs your review bot with your coding agent to automat
 
 ## Project Structure
 
-- `src/reviewloop_cli/` — CLI package (typer-based), entry point in `cli.py`
-- `src/reviewloop_cli/templates/` — Bundled template files (bash scripts, SKILL.md) — single source of truth for `reviewloop init`
+- `src/ralph_idea_cli/` — CLI package (typer-based), entry point in `cli.py`
 - `specs/` — Feature specifications (speckit-managed)
 
 ## Tech Stack
 
 - **Python**: 3.13+ with uv (CLI package + project tooling)
-- **Bash**: 4.0+ for review loop scripts (bundled in `src/reviewloop_cli/templates/`)
 - **CLI Framework**: typer, readchar (interactive selection)
 - **Linting/Formatting**: ruff
 - **Type Checking**: pyright (strict mode)

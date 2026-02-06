@@ -1,4 +1,4 @@
-# Autonomous Review Loop Constitution
+# Ralph Idea Machine Constitution
 
 ## Core Principles
 
