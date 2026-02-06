@@ -33,6 +33,38 @@ Then repeat. Each pass deepens understanding rather than forcing premature conve
 - **Interactive steering:** Inject thoughts and feedback during active processing to redirect focus
 - **Verified validation:** Ideas progress through documented phases with structured assessment
 
+## Usage
+
+Ralph Ideate runs as [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills. In any repository with these skills installed:
+
+### Create a brainstorming domain
+
+```
+/ralph-ideate.create saas-tools
+```
+
+This scaffolds the domain directory structure and guides you through writing a `DESCRIPTION.md` that defines scope, focus, constraints, and evaluation criteria.
+
+### Explore ideas
+
+```
+/ralph-ideate.explore src/saas-tools --max-iterations 10
+```
+
+This starts the Ralph Loop — a continuous cycle that generates candidate ideas, researches pain points with real user evidence, critically evaluates viability, and moves ideas to `verified/` or `discarded/`. Each iteration reads the current state fresh and decides which phase to execute.
+
+Omit `--max-iterations` to run indefinitely. Inject steering feedback between iterations to redirect focus.
+
+### Domain structure
+
+```
+src/<domain>/
+├── DESCRIPTION.md    # Scope, focus, constraints
+├── candidates/       # Ideas under evaluation
+├── verified/         # Ideas that passed scrutiny
+└── discarded/        # Rejected ideas with reasoning
+```
+
 ## Installation
 
 ```bash
