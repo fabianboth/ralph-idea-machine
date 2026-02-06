@@ -5,7 +5,7 @@
 </div>
 
 <p align="center">
-    <strong>The cycle of ideate, extend, research, scrutinize, repeat — fully automated. <code>ralph-idea</code> covers ground systematically so you can focus on steering, not grinding.</strong>
+    <strong>The cycle of ideate, extend, research, scrutinize, repeat - fully automated. <code>ralph-idea</code> covers ground systematically so you can focus on steering, not grinding.</strong>
 </p>
 
 <p align="center">
@@ -20,10 +20,10 @@
 
 The Ralph Loop is a structured brainstorming methodology that cycles through four phases:
 
-1. **Ideate** — Generate and capture ideas
-2. **Extend** — Build on and expand promising concepts
-3. **Research** — Investigate and validate with real-world data
-4. **Scrutinize** — Critically evaluate and challenge assumptions
+1. **Ideate:** Generate and capture ideas
+2. **Extend:** Build on and expand promising concepts
+3. **Research:** Investigate and validate with real-world data
+4. **Scrutinize:** Critically evaluate and challenge assumptions
 
 Then repeat. Each pass deepens understanding rather than forcing premature convergence.
 
@@ -38,7 +38,3 @@ Then repeat. Each pass deepens understanding rather than forcing premature conve
 ```bash
 uv tool install ralph-idea
 ```
-
-## Status
-
-This project is under active development. Read more about the concept at [fabianboth.dev/projects/idea-machine](https://fabianboth.dev/projects/idea-machine/).
